@@ -24,9 +24,9 @@ public class FileController {
 	@Autowired
 	private FileService fileService;
 
-	@PostMapping("/upload")
-	public void uploadFile(@RequestHeader("clientName") String clientName,@RequestParam("file") MultipartFile file) throws IOException {
-		fileService.uploadFile(clientName,file);
+	@PostMapping("/Upload")
+	public String uploadFile(@RequestHeader("clientName") String clientName,@RequestParam("file") MultipartFile file) throws IOException {
+		return fileService.uploadFile(clientName,file);
 	}
 
 	@GetMapping(path = { "/{clientName}/{fileName:.+}" })

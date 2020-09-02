@@ -22,7 +22,7 @@ public class CircularController {
 	@Autowired
 	private CircularService circularService;
 	
-	@GetMapping("/Circular")
+	@GetMapping("/Circulars")
 	 public @ResponseBody ResponseEntity<List<CircularDto>> getAllCircular() throws Exception{
 		List<CircularDto> circularDtos = circularService.getAllCircular();
 		 return ResponseEntity.ok(circularDtos);

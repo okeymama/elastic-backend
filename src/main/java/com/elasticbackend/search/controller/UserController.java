@@ -17,7 +17,6 @@ import com.elasticbackend.search.service.UserService;
 
 
 @RestController
-@RequestMapping("/api/CDR")
 public class UserController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -25,7 +24,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value="/User-Login", method = RequestMethod.GET)
 	public ResponseEntity<UserDto> validateUser(@RequestParam(value="login.username",required=false) String userName,
 			@RequestParam(value="login.password",required=false) String password) {
 		

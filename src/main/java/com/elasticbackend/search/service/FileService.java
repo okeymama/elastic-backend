@@ -25,7 +25,7 @@ public class FileService {
 	final String appName = "fileStore";
 	final String directory = "C:\\Users\\cchaubey\\Documents\\app_services";
 
-	public void uploadFile(String clientName,MultipartFile file) throws IOException {
+	public String uploadFile(String clientName,MultipartFile file) throws IOException {
 		Long id = new Date().getTime();
 		System.out.println("Original File Byte Size - " + file.getBytes().length);
 		String fileName = createFileName(id, file.getOriginalFilename());
@@ -41,6 +41,7 @@ public class FileService {
 			e.printStackTrace();
 		} catch (IOException e) {
 		}
+		return fileName;
 	}
 
 
