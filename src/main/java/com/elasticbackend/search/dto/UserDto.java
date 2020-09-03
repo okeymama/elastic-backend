@@ -24,7 +24,7 @@ public class UserDto {
 	
 	private Boolean isAdmin;
 	
-	
+	private String clientNumber;
 
 	public String getUserName() {
 		return userName;
