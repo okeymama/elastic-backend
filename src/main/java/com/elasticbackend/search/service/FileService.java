@@ -23,7 +23,7 @@ public class FileService {
 	FileRepo fileRepo;
 	
 	final String appName = "fileStore";
-	final String directory = "C:\\Users\\cchaubey\\Documents\\app_services";
+	final String directory = "C:\\Users\\udayv\\Documents\\Chandan";
 
 	public String uploadFile(String clientName,MultipartFile file) throws IOException {
 		Long id = new Date().getTime();

@@ -2,6 +2,7 @@ package com.elasticbackend.search.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -29,26 +30,12 @@ public class CircularService {
 		}
 		return circularDto ;
 	}
-
-	/*
-	 * public List<CircularDto> getCircularMatch(String key) { NativeSearchQuery
-	 * searchQuery = new NativeSearchQueryBuilder()
-	 * .withQuery(multiMatchQuery("tutorial") .field("title") .field("tags")
-	 * .type(MultiMatchQueryBuilder.Type.BEST_FIELDS)) .build(); circularDtos =
-	 * circularRepo.search(searchQuery); return circularDtos ; }
-	 */
 	
 	
 	public Page<CircularDto> getCircularMatch(String keyWord, int page, int limit) {
 		Pageable pageable = PageRequest.of(page, limit);
-		QueryBuilder queryBuilder = //QueryBuilders.boolQuery()
-				//.should(QueryBuilders.matchQuery("clientNumber", keyWord))
-				//.should(QueryBuilders.matchQuery("circularNumber", keyWord))
-				//.should(QueryBuilders.matchQuery("date", keyWord))
-				//.should(QueryBuilders.matchQuery("circularDetail", keyWord))
-				//.should(QueryBuilders.matchQuery("departmant", keyWord));
+		QueryBuilder queryBuilder =
 		QueryBuilders.boolQuery().should(QueryBuilders.queryStringQuery(keyWord).analyzeWildcard(true)
-        //.field("clientNumber").field("circularNumber").field("date")
         .field("circularDetail"));
 		NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
 		nativeSearchQueryBuilder.withQuery(queryBuilder).withPageable(pageable);
@@ -57,8 +44,9 @@ public class CircularService {
 	}
 	
 	
-	public List<CircularDto> getCircularMatch(String keyWord){
-		return circularRepo.findByCircularNumberOrDateOrCircularDetailOrDepartmant(keyWord, keyWord, keyWord, keyWord);
+	public List<CircularDto> getCircularMatch(String clientName, String keyWord){
+		List<CircularDto> circularDtos = circularRepo.findByCircularNumberOrDateOrCircularDetailOrDepartmantOrFileName(keyWord, keyWord, keyWord, keyWord, keyWord);
+		return circularDtos.stream().filter(x -> x.getClientNumber().equals(clientName)).collect(Collectors.toList());
 	}
 	
 	public List<CircularDto> getAllCircular() {

@@ -17,7 +17,7 @@ import com.elasticbackend.search.dto.CircularDto;
 @Repository
 public interface CircularRepo extends ElasticsearchRepository<CircularDto, Long>{
 
-	List<CircularDto> findByCircularNumberOrDateOrCircularDetailOrDepartmant(String circularNumber,String date,String circularDetail,String departmant);
+	List<CircularDto> findByCircularNumberOrDateOrCircularDetailOrDepartmantOrFileName(String circularNumber,String date,String circularDetail,String departmant, String fileName);
 	
 }
 		
