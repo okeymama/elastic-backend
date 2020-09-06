@@ -80,7 +80,6 @@ public class CircularDto implements Serializable{
 		this.departmant = departmant;
 	}
 
-	//private byte[]  circularAttachment;
 
 }
 

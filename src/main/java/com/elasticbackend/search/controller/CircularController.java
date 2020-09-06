@@ -45,4 +45,9 @@ public class CircularController {
 		 return "Successfully Saved";
 	 }
 	
+	@GetMapping("/Duplicate-Circular/{clientName}/{circularNumber}")
+	public Boolean checkDuplicateCircularNumber(@PathVariable("clientName")String clientName,@PathVariable("circularNumber")String circularNumber) {
+		return circularService.checkDuplicateCircularNumber(clientName, circularNumber);
+	}
+	
 }

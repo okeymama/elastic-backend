@@ -23,12 +23,17 @@ public class CircularService {
 	@Autowired
 	private CircularRepo circularRepo; 
 
-	public CircularDto getCircular(Long circularId) {
-		CircularDto circularDto = null;
-		if(circularRepo.findById(circularId).isPresent()) {
-			circularDto = circularRepo.findById(circularId).get();
+	public Boolean checkDuplicateCircularNumber(String clientName,String circularNumber) {
+		Boolean flag = false;
+		if(circularRepo.findByClientNumberAndCircularNumber(clientName,circularNumber).isPresent()) {
+			List<CircularDto> circularDtos = circularRepo.findByClientNumberAndCircularNumber(clientName,circularNumber).get();
+			Long count = circularDtos.stream().filter(cd->cd.getClientNumber().equals(clientName) 
+						&& cd.getCircularNumber().equals(circularNumber)).count();
+			if(count>0) {
+				flag = true;
+			}
 		}
-		return circularDto ;
+		return flag ;
 	}
 	
 	
@@ -59,5 +64,7 @@ public class CircularService {
 	public void saveCircular(CircularDto circularDto) {
 		 circularRepo.save(circularDto);
 	}
+	
+	
 
 }
