@@ -44,5 +44,10 @@ public class UserController {
 	public void saveUser(@RequestBody UserDto userDto) {
 		userService.saveUser(userDto);
 	}
+	
+	@RequestMapping(value="/Users", method = RequestMethod.GET)
+	public Iterable<UserDto> getAllUser(){
+		return userService.getAllUser();
+	}
 
 }
