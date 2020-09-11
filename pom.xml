@@ -109,7 +109,7 @@
 							<outputDirectory>${build.directory}/classes/static/</outputDirectory>
 							<resources>
 								<resource>
-									<directory>C:/Users/Administrator/Documents/search_app/software/Circular-Tracking-UI/dist/search-app</directory>
+									<directory>C:/Users/cchaubey/Documents/app_services/Circular-Tracking-UI/dist/search-app</directory>
 								</resource>
 							</resources>
 						</configuration>
