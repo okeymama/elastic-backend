@@ -31,8 +31,8 @@ public class EnquiryController {
 	}
 
 	@GetMapping("/Duplicate-Enquiry/{enquiryNumber}")
-	public Boolean checkDuplicatePOIteamCode(@PathVariable("enquiryNumber")String enquiryNumber){
-		return false;
+	public Boolean checkDuplicateEnquiry(@PathVariable("enquiryNumber")String enquiryNumber){
+		return enquiryService.checkDuplicateEnquiry(enquiryNumber);
 	}
 	
 }

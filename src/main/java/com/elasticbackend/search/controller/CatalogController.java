@@ -32,7 +32,7 @@ public class CatalogController {
 	
 	@GetMapping("/Duplicate-Catalog/{modelNo}")
 	public Boolean checkDuplicateCircularNumber(@PathVariable("modelNo")String modelNo) {
-		return false;
+		return catalogService.checkDuplicateModelNo(modelNo);
 	}
 
 

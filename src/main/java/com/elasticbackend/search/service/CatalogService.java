@@ -1,5 +1,8 @@
 package com.elasticbackend.search.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,20 @@ public class CatalogService {
 
 	public void saveCatalogs(CatalogDto catalogDto) {
 		catalogRepo.save(catalogDto);
+	}
+
+
+	public Boolean checkDuplicateModelNo(String modelNo) {
+		Boolean flag = false;
+		Optional<List<CatalogDto>> option = catalogRepo.findByModelNo(modelNo);
+		if(option.isPresent()) {
+			List<CatalogDto> catalogDtos = option.get();
+			Long count = catalogDtos.stream().filter(x->x.getModelNo().equalsIgnoreCase(modelNo)).count();
+			if(count > 0) {
+				flag = true;
+			}
+		}
+		return flag;
 	}
 
 

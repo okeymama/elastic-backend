@@ -38,12 +38,14 @@ public class CircularController {
 	}
 	
 	@PostMapping("/Circular")
-	 public @ResponseBody String saveCircular(@RequestBody CircularDto circularDto){
-		 Long id = new Date().getTime();
-		 circularDto.setId(id);
-		 circularService.saveCircular(circularDto);
-		 return "Successfully Saved";
-	 }
+	public @ResponseBody String saveCircular(@RequestBody CircularDto circularDto){
+		if(null != circularDto && null == circularDto.getId()) { 
+			Long id = new Date().getTime();
+			circularDto.setId(id);
+		}
+		circularService.saveCircular(circularDto);
+		return "Successfully Saved";
+	}
 	
 	@GetMapping("/Duplicate-Circular/{clientName}/{circularNumber}")
 	public Boolean checkDuplicateCircularNumber(@PathVariable("clientName")String clientName,@PathVariable("circularNumber")String circularNumber) {
