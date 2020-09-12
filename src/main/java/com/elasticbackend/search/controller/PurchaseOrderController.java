@@ -36,9 +36,9 @@ public class PurchaseOrderController {
 
 	}
 
-	@GetMapping("/Duplicate-PurchaseOrder/{iteamCode}")
-	public Boolean checkDuplicatePOIteamCode(@PathVariable("iteamCode")String iteamCode){
-		return purchaseOrderService.checkDuplicatePOItemCode(iteamCode);
+	@GetMapping("/Duplicate-PurchaseOrder/{orderNo}")
+	public Boolean checkDuplicatePOIteamCode(@PathVariable("orderNo")String orderNo){
+		return purchaseOrderService.checkDuplicatePOOrderNo(orderNo);
 	}
 
 	@GetMapping("/PurchaseOrders/{key}")

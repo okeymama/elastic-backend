@@ -34,12 +34,12 @@ public class PurchaseOrderService {
 		purchaseOrderRepo.save(purchaseOrderDto);
 	}
 
-	public Boolean checkDuplicatePOItemCode(String itemCode) {
+	public Boolean checkDuplicatePOOrderNo(String orderNo) {
 		Boolean flag = false;
-		Optional<List<PurchaseOrderDto>> purchaseOrderDtoOption = purchaseOrderRepo.findByItemCode(itemCode);
+		Optional<List<PurchaseOrderDto>> purchaseOrderDtoOption = purchaseOrderRepo.findByOrderNo(orderNo);
 		if(purchaseOrderDtoOption.isPresent()) {
 			List<PurchaseOrderDto> purchaseOrderDtos = purchaseOrderDtoOption.get();
-			Long count = purchaseOrderDtos.stream().filter(cd->cd.getItemCode().equals(itemCode)).count();
+			Long count = purchaseOrderDtos.stream().filter(cd->cd.getItemCode().equals(orderNo)).count();
 			if(count>0) {
 				flag = true;
 			}
