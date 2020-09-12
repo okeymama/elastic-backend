@@ -39,7 +39,7 @@ public class PurchaseOrderService {
 		Optional<List<PurchaseOrderDto>> purchaseOrderDtoOption = purchaseOrderRepo.findByOrderNo(orderNo);
 		if(purchaseOrderDtoOption.isPresent()) {
 			List<PurchaseOrderDto> purchaseOrderDtos = purchaseOrderDtoOption.get();
-			Long count = purchaseOrderDtos.stream().filter(cd->cd.getItemCode().equals(orderNo)).count();
+			Long count = purchaseOrderDtos.stream().filter(cd->cd.getOrderNo().equals(orderNo)).count();
 			if(count>0) {
 				flag = true;
 			}
