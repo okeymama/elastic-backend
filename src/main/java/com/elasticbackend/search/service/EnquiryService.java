@@ -3,7 +3,6 @@ package com.elasticbackend.search.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +21,9 @@ public class EnquiryService {
 	}
 
 	public void saveEnquirys(EnquiryDto enquiryDto) {
+		if(null != enquiryDto && null != enquiryDto.getRemark()) {
+			enquiryDto.setRemark(enquiryDto.getRemark() + " >> " + enquiryDto.getDate());
+		}
 		enquiryRepo.save(enquiryDto);
 	}
 
@@ -35,5 +37,12 @@ public class EnquiryService {
 		}
 		return flag;
 	}
+	
+	public List<EnquiryDto> getMatchingEnquirys(String key){
+		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameOrPersonNameOrMobileOrPlaceOrEnquiryNumberOrItemDescriptionOrMakeOrStatusOrRemarkOrFileName
+				(key, key, key, key, key, key, key, key, key, key);
+		return enquirys;
+	}
+
 	
 }

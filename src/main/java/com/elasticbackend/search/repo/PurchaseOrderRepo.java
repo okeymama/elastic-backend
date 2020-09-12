@@ -13,4 +13,6 @@ public interface PurchaseOrderRepo extends ElasticsearchRepository<PurchaseOrder
 
 	Optional<List<PurchaseOrderDto>> findByItemCode(String itemCode);
 
+	List<PurchaseOrderDto> findByOrderNoOrItemOrMakeOrModelNoOrQuantityOrRateOrRemarkOrItemCodeOrCustomerOrFileName(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName);
+
 }

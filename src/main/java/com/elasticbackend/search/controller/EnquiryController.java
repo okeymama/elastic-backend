@@ -1,5 +1,7 @@
 package com.elasticbackend.search.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,12 @@ public class EnquiryController {
 	public Boolean checkDuplicateEnquiry(@PathVariable("enquiryNumber")String enquiryNumber){
 		return enquiryService.checkDuplicateEnquiry(enquiryNumber);
 	}
+	
+	@GetMapping("/Enquiry/{key}")
+	public List<EnquiryDto>	getMatchingEnquirys(@PathVariable("key")String key){
+		return enquiryService.getMatchingEnquirys(key);
+	}
+
 	
 }
 

@@ -1,5 +1,7 @@
 package com.elasticbackend.search.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,11 @@ public class CatalogController {
 	@GetMapping("/Duplicate-Catalog/{modelNo}")
 	public Boolean checkDuplicateCircularNumber(@PathVariable("modelNo")String modelNo) {
 		return catalogService.checkDuplicateModelNo(modelNo);
+	}
+	
+	@GetMapping("/Catalog/{key}")
+	public List<CatalogDto>	getMatchingCatalog(@PathVariable("key")String key){
+		return catalogService.getMatchingCatalog(key);
 	}
 
 

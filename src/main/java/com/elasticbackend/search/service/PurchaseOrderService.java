@@ -28,6 +28,9 @@ public class PurchaseOrderService {
 	}
 
 	public void savePurchaseOrderOrders(PurchaseOrderDto purchaseOrderDto) {
+		if(null != purchaseOrderDto && null != purchaseOrderDto.getDate()) {
+			purchaseOrderDto.setRemark(purchaseOrderDto.getRemark()+" >> "+purchaseOrderDto.getDate());
+		}
 		purchaseOrderRepo.save(purchaseOrderDto);
 	}
 
@@ -61,6 +64,12 @@ public class PurchaseOrderService {
 		nativeSearchQueryBuilder.withQuery(queryBuilder).withPageable(pageable);
 		NativeSearchQuery query = nativeSearchQueryBuilder.build();
 		return purchaseOrderRepo.search(query);
+	}
+	
+	
+	public List<PurchaseOrderDto> getMatchingPurchaseOrder(String key){
+		return purchaseOrderRepo.findByOrderNoOrItemOrMakeOrModelNoOrQuantityOrRateOrRemarkOrItemCodeOrCustomerOrFileName
+				(key, key, key, key, key, key, key, key, key, key);
 	}
 	
 	

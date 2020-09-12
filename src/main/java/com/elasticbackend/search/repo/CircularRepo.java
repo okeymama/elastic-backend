@@ -20,7 +20,7 @@ import com.elasticbackend.search.dto.CircularDto;
 @Repository
 public interface CircularRepo extends ElasticsearchRepository<CircularDto, Long>{
 
-	List<CircularDto> findByCircularNumberOrDateOrCircularDetailOrDepartmantOrFileName(String circularNumber,String date,String circularDetail,String departmant, String fileName);
+	List<CircularDto> findByCircularNumberOrCircularDetailOrDepartmantOrFileName(String circularNumber,String circularDetail,String departmant, String fileName);
 
 	Optional<List<CircularDto>> findByClientNumberAndCircularNumber(String clientName, String circularNumber);
 	

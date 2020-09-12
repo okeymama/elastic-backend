@@ -39,6 +39,9 @@ public class CatalogService {
 		return flag;
 	}
 
-
+	public List<CatalogDto> getMatchingCatalog(String key){
+		return catalogRepo.findByProductNameOrModelNoOrOldModelNoOrVoltageOrRangeOrColourOrFileName
+				(key, key, key, key, key, key, key);
+	}
 
 }

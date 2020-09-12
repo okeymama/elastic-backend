@@ -50,7 +50,7 @@ public class CircularService {
 	
 	
 	public List<CircularDto> getCircularMatch(String clientName, String keyWord){
-		List<CircularDto> circularDtos = circularRepo.findByCircularNumberOrDateOrCircularDetailOrDepartmantOrFileName(keyWord, keyWord, keyWord, keyWord, keyWord);
+		List<CircularDto> circularDtos = circularRepo.findByCircularNumberOrCircularDetailOrDepartmantOrFileName(keyWord, keyWord, keyWord, keyWord);
 		return circularDtos.stream().filter(x -> x.getClientNumber().equals(clientName)).collect(Collectors.toList());
 	}
 	

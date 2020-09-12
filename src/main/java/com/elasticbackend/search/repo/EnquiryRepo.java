@@ -12,5 +12,8 @@ import com.elasticbackend.search.dto.EnquiryDto;
 public interface EnquiryRepo extends ElasticsearchRepository<EnquiryDto, String> {
 
 	Optional<List<EnquiryDto>> findByEnquiryNumber(String enquiryNumber);
+	
+	List<EnquiryDto> findByCompanyNameOrPersonNameOrMobileOrPlaceOrEnquiryNumberOrItemDescriptionOrMakeOrStatusOrRemarkOrFileName
+	(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName);
 
 }

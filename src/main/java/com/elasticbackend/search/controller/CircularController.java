@@ -41,8 +41,9 @@ public class CircularController {
 	public @ResponseBody String saveCircular(@RequestBody CircularDto circularDto){
 		if(null != circularDto && null == circularDto.getId()) { 
 			Long id = new Date().getTime();
-			circularDto.setId(id);
+			circularDto.setId(id);	
 		}
+		circularDto.setCircularDetail(circularDto.getCircularDetail() + " >> " +circularDto.getDate());
 		circularService.saveCircular(circularDto);
 		return "Successfully Saved";
 	}
