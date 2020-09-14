@@ -32,8 +32,8 @@ public class EnquiryController {
 		enquiryService.saveEnquirys(enquiryDto);
 	}
 
-	@GetMapping("/Duplicate-Enquiry/{enquiryNumber}")
-	public Boolean checkDuplicateEnquiry(@PathVariable("enquiryNumber")String enquiryNumber){
+	@PostMapping("/Duplicate-Enquiry")
+	public Boolean checkDuplicateEnquiry(@RequestBody String enquiryNumber){
 		return enquiryService.checkDuplicateEnquiry(enquiryNumber);
 	}
 	
