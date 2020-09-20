@@ -1,9 +1,11 @@
 package com.elasticbackend.search.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.elasticbackend.search.dto.EnquiryDto;
@@ -16,13 +18,16 @@ public class EnquiryService {
 	private EnquiryRepo enquiryRepo;
 
 	public Iterable<EnquiryDto> getAllEnquiry(){
-		Iterable<EnquiryDto> enquirys = enquiryRepo.findAll();
+		Iterable<EnquiryDto> enquirys = enquiryRepo.findAll(new PageRequest(0, 500));
 		return enquirys;
 	}
 
 	public void saveEnquirys(EnquiryDto enquiryDto) {
-		if(null != enquiryDto && null != enquiryDto.getRemark()) {
+		if(null != enquiryDto.getRemark()) {
 			enquiryDto.setRemark(enquiryDto.getRemark() + " >> " + enquiryDto.getDate());
+		}
+		if(null == enquiryDto.getCreationDate()) {
+			enquiryDto.setCreationDate(new Date());
 		}
 		enquiryRepo.save(enquiryDto);
 	}
@@ -40,9 +45,14 @@ public class EnquiryService {
 	
 	public List<EnquiryDto> getMatchingEnquirys(String key){
 		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameOrPersonNameOrMobileOrPlaceOrEnquiryNumberOrItemDescriptionOrMakeOrStatusOrRemarkOrFileName
-				(key, key, key, key, key, key, key, key, key, key);
+				(key, key, key, key, key, key, key, key, key, key, new PageRequest(0, 500));
 		return enquirys;
 	}
 
+	public List<EnquiryDto> getMatchingEnquirys(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName){
+		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameAndPersonNameAndMobileAndPlaceAndEnquiryNumberAndItemDescriptionAndMakeAndStatusAndRemarkAndFileName
+				(companyName, personName, mobile,place ,enquiryNumber , itemDescription, make, status, remark, fileName, new PageRequest(0, 500));
+		return enquirys;
+	}
 	
 }

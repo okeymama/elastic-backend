@@ -3,6 +3,7 @@ package com.elasticbackend.search.repo;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +14,12 @@ public interface PurchaseOrderRepo extends ElasticsearchRepository<PurchaseOrder
 
 	Optional<List<PurchaseOrderDto>> findByItemCode(String itemCode);
 
-	List<PurchaseOrderDto> findByOrderNoOrItemOrMakeOrModelNoOrQuantityOrRateOrRemarkOrItemCodeOrCustomerOrFileName(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName);
+	List<PurchaseOrderDto> findByOrderNoOrItemOrMakeOrModelNoOrQuantityOrRateOrRemarkOrItemCodeOrCustomerOrFileName
+	(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName, PageRequest pageRequest);
 
 	Optional<List<PurchaseOrderDto>> findByOrderNo(String orderNo);
+
+	List<PurchaseOrderDto> findByOrderNoAndItemAndMakeAndModelNoAndQuantityAndRateAndRemarkAndItemCodeAndCustomerAndFileName
+	(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName, PageRequest pageRequest);
 
 }

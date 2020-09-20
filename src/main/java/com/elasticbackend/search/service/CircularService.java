@@ -1,7 +1,8 @@
 package com.elasticbackend.search.service;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.elasticsearch.index.query.QueryBuilder;
@@ -25,8 +26,9 @@ public class CircularService {
 
 	public Boolean checkDuplicateCircularNumber(String clientName,String circularNumber) {
 		Boolean flag = false;
-		if(circularRepo.findByClientNumberAndCircularNumber(clientName,circularNumber).isPresent()) {
-			List<CircularDto> circularDtos = circularRepo.findByClientNumberAndCircularNumber(clientName,circularNumber).get();
+		Optional<List<CircularDto>> circular = circularRepo.findByClientNumberAndCircularNumber(clientName,circularNumber);
+		if(circular.isPresent()) {
+			List<CircularDto> circularDtos = circular.get();
 			Long count = circularDtos.stream().filter(cd->cd.getClientNumber().equals(clientName) 
 						&& cd.getCircularNumber().equals(circularNumber)).count();
 			if(count>0) {
@@ -50,21 +52,37 @@ public class CircularService {
 	
 	
 	public List<CircularDto> getCircularMatch(String clientName, String keyWord){
-		List<CircularDto> circularDtos = circularRepo.findByCircularNumberOrCircularDetailOrDepartmantOrFileName(keyWord, keyWord, keyWord, keyWord);
+		List<CircularDto> circularDtos = circularRepo.findByCircularNumberOrCircularDetailOrDepartmantOrFileName(keyWord, keyWord, keyWord, keyWord,new PageRequest(0, 500));
 		return circularDtos.stream().filter(x -> x.getClientNumber().equals(clientName)).collect(Collectors.toList());
 	}
 	
-	public List<CircularDto> getAllCircular() {
-		Iterable<CircularDto> circularDtoIter =  circularRepo.findAll();
-		List<CircularDto> circularDtos = new ArrayList<>();
-		circularDtoIter.iterator().forEachRemaining(circularDtos::add);
-		return circularDtos ;
+	public Iterable<CircularDto> getAllCircular() {
+		Iterable<CircularDto> circularDtoIter =  circularRepo.findAll(new PageRequest(0, 500));
+		return circularDtoIter ;
 	}
 	
 	public void saveCircular(CircularDto circularDto) {
+		if(null == circularDto.getCreationDate()) {
+			circularDto.setCreationDate(new Date());
+		}
 		 circularRepo.save(circularDto);
 	}
 	
+	public List<CircularDto> findAllCircular(){
+		return circularRepo.findAllCircular();
+	}
 	
-
+	public Long findAllCircularCount() {
+		return circularRepo.findAllCircularCount();
+	}
+	
+	public Long findCircularCountByUser(String createdBy) {
+		return circularRepo.countByCreatedBy(createdBy);
+	}
+	
+	public List<CircularDto> getCircularMatch(String clientName, String circularNumber,String circularDetail,String departmant,String fileName){
+		List<CircularDto> circularDtos = circularRepo.findByCircularNumberAndCircularDetailAndDepartmantAndFileName(circularNumber, circularDetail, departmant, fileName, new PageRequest(0, 500));
+		return circularDtos.stream().filter(x -> x.getClientNumber().equals(clientName)).collect(Collectors.toList()); 
+	}
+	
 }

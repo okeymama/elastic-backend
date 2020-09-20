@@ -1,5 +1,7 @@
 package com.elasticbackend.search.dto;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -25,6 +27,10 @@ public class UserDto {
 	private Boolean isAdmin;
 	
 	private String clientNumber;
+	
+	private Date creationDate;
+	
+	private String createdBy;
 
 	public String getUserName() {
 		return userName;

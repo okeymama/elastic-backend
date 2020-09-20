@@ -3,6 +3,7 @@ package com.elasticbackend.search.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,10 @@ public class CatalogController {
 	}
 
 
+	@PostMapping("/Catalog-Match")
+	public List<CatalogDto>	getMatchingCatalog(@RequestBody CatalogDto catalogDto){
+		return catalogService.getMatchingCatalog(catalogDto.getProductName(), catalogDto.getModelNo(), catalogDto.getModelNo(), catalogDto.getVoltage(), catalogDto.getRange(), catalogDto.getColour(), catalogDto.getFileName());
+	}
 }
 
 

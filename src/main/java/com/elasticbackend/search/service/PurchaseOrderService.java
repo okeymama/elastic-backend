@@ -1,5 +1,6 @@
 package com.elasticbackend.search.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +24,16 @@ public class PurchaseOrderService {
 	private PurchaseOrderRepo purchaseOrderRepo;
 
 	public Iterable<PurchaseOrderDto> getAllPurchaseOrder(){
-		Iterable<PurchaseOrderDto> purchaseOrderDtos = purchaseOrderRepo.findAll();
+		Iterable<PurchaseOrderDto> purchaseOrderDtos = purchaseOrderRepo.findAll(new PageRequest(0, 500));
 		return purchaseOrderDtos;
 	}
 
 	public void savePurchaseOrderOrders(PurchaseOrderDto purchaseOrderDto) {
 		if(null != purchaseOrderDto && null != purchaseOrderDto.getDate()) {
 			purchaseOrderDto.setRemark(purchaseOrderDto.getRemark()+" >> "+purchaseOrderDto.getDate());
+		}
+		if(null == purchaseOrderDto.getCreationDate()) {
+			purchaseOrderDto.setCreationDate(new Date());
 		}
 		purchaseOrderRepo.save(purchaseOrderDto);
 	}
@@ -69,10 +73,13 @@ public class PurchaseOrderService {
 	
 	public List<PurchaseOrderDto> getMatchingPurchaseOrder(String key){
 		return purchaseOrderRepo.findByOrderNoOrItemOrMakeOrModelNoOrQuantityOrRateOrRemarkOrItemCodeOrCustomerOrFileName
-				(key, key, key, key, key, key, key, key, key, key);
+				(key, key, key, key, key, key, key, key, key, key, new PageRequest(0, 500));
 	}
 	
-	
+	public List<PurchaseOrderDto> getMatchingPurchaseOrder(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName){
+		return purchaseOrderRepo.findByOrderNoAndItemAndMakeAndModelNoAndQuantityAndRateAndRemarkAndItemCodeAndCustomerAndFileName
+				(orderNo, item, make, modelNo, quantity, rate, remark, itemCode, customer, fileName,new PageRequest(0, 500));
+	}
 
 
 }

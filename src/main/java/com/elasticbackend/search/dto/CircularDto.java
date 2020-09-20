@@ -1,6 +1,7 @@
 package com.elasticbackend.search.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -31,6 +32,10 @@ public class CircularDto implements Serializable{
 	private String departmant;
 	
 	private String fileName;
+	
+	private Date creationDate;
+	
+	private String createdBy;
 
 	public Long getId() {
 		return id;

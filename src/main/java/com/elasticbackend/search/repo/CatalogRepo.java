@@ -3,6 +3,7 @@ package com.elasticbackend.search.repo;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,10 @@ public interface CatalogRepo extends ElasticsearchRepository<CatalogDto, String>
 	
 	
 	List<CatalogDto> findByProductNameOrModelNoOrOldModelNoOrVoltageOrRangeOrColourOrFileName
-	(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName);
+	(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName, PageRequest pageRequest);
+
+
+	List<CatalogDto> findByProductNameAndModelNoAndOldModelNoAndVoltageAndRangeAndColourAndFileName
+	(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName, PageRequest pageRequest);
 
 }

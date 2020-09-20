@@ -25,9 +25,9 @@ public class CircularController {
 	@Autowired
 	private CircularService circularService;
 	
-	@GetMapping("/Circulars")
-	 public @ResponseBody ResponseEntity<List<CircularDto>> getAllCircular() throws Exception{
-		List<CircularDto> circularDtos = circularService.getAllCircular();
+	@GetMapping("/Circulars-Paged")
+	 public @ResponseBody ResponseEntity<Iterable<CircularDto>> getAllCircular() throws Exception{
+		Iterable<CircularDto> circularDtos = circularService.getAllCircular();
 		 return ResponseEntity.ok(circularDtos);
 	 }
 	
@@ -51,6 +51,27 @@ public class CircularController {
 	@GetMapping("/Duplicate-Circular/{clientName}/{circularNumber}")
 	public Boolean checkDuplicateCircularNumber(@PathVariable("clientName")String clientName,@PathVariable("circularNumber")String circularNumber) {
 		return circularService.checkDuplicateCircularNumber(clientName, circularNumber);
+	}
+	
+	@GetMapping("/Circulars")
+	public List<CircularDto> findAllCircular(){
+		return circularService.findAllCircular();
+	}
+	
+	@GetMapping("/Circulars/Count")
+	public Long findAllCircularCount() {
+		return circularService.findAllCircularCount();
+	}
+	
+	@GetMapping("/Circulars/{createdBy}/Count")
+	public Long findCircularCountByUser(@PathVariable("createdBy")String createdBy) {
+		return circularService.findCircularCountByUser(createdBy);
+	}
+	
+	@PostMapping("/Circulars-Match")
+	public @ResponseBody ResponseEntity<List<CircularDto>> getCircularMatch(@RequestBody CircularDto circularDto){
+		List<CircularDto> circularDtos = circularService.getCircularMatch(circularDto.getClientNumber(),circularDto.getCircularNumber(), circularDto.getCircularDetail(),circularDto.getDepartmant(),circularDto.getFileName());
+		 return ResponseEntity.ok(circularDtos);
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.elasticbackend.search.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,10 @@ public class EnquiryController {
 		return enquiryService.getMatchingEnquirys(key);
 	}
 
+	@PostMapping("/Enquiry-Match")
+	public List<EnquiryDto> getMatchingEnquirys(@RequestBody EnquiryDto enquiryDto){
+		return enquiryService.getMatchingEnquirys(enquiryDto.getCompanyName(), enquiryDto.getPersonName(), enquiryDto.getMobile(),enquiryDto.getPlace(),enquiryDto.getEnquiryNumber(), enquiryDto.getItemDescription(), enquiryDto.getMake(), enquiryDto.getStatus(), enquiryDto.getRemark(), enquiryDto.getFileName());
+	}
 	
 }
 

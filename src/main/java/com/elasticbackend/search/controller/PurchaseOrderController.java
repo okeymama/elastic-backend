@@ -3,6 +3,7 @@ package com.elasticbackend.search.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +32,8 @@ public class PurchaseOrderController {
 	}
 
 	@PostMapping("/PurchaseOrders")
-	public void	savePurchaseOrders(@RequestBody PurchaseOrderDto PurchaseOrderDto){
-		purchaseOrderService.savePurchaseOrderOrders(PurchaseOrderDto);
+	public void	savePurchaseOrders(@RequestBody PurchaseOrderDto purchaseOrderDto){
+		purchaseOrderService.savePurchaseOrderOrders(purchaseOrderDto);
 
 	}
 
@@ -46,4 +47,9 @@ public class PurchaseOrderController {
 		return purchaseOrderService.getMatchingPurchaseOrder(key);
 	}
 
+	@PostMapping("/PurchaseOrders-Match")
+	public List<PurchaseOrderDto> getMatchingPurchaseOrder(@RequestBody PurchaseOrderDto purchaseOrderDto){
+		return purchaseOrderService.getMatchingPurchaseOrder(purchaseOrderDto.getOrderNo(), purchaseOrderDto.getItem(), purchaseOrderDto.getMake(), purchaseOrderDto.getModelNo(), purchaseOrderDto.getQuantity(), purchaseOrderDto.getRate(), purchaseOrderDto.getRemark(), purchaseOrderDto.getItemCode(), purchaseOrderDto.getCustomer(), purchaseOrderDto.getFileName());
+	}
+	
 }

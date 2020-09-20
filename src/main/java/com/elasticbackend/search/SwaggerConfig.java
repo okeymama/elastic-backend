@@ -1,4 +1,4 @@
-package com.elasticbackend.search;
+/*package com.elasticbackend.search;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,4 +51,4 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 
-}
+}*/
