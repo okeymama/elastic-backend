@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.elasticbackend.search.dto.PurchaseOrderDto;
 import com.elasticbackend.search.repo.PurchaseOrderRepo;
+import com.elasticbackend.search.util.SearchUtil;
 
 @Service
 public class PurchaseOrderService {
@@ -77,6 +78,16 @@ public class PurchaseOrderService {
 	}
 	
 	public List<PurchaseOrderDto> getMatchingPurchaseOrder(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName){
+		orderNo = SearchUtil.setDefaultAsterisk(orderNo);
+		item = SearchUtil.setDefaultAsterisk(item);
+		make = SearchUtil.setDefaultAsterisk(make);
+		modelNo = SearchUtil.setDefaultAsterisk(modelNo);
+		quantity = SearchUtil.setDefaultAsterisk(quantity);
+		rate = SearchUtil.setDefaultAsterisk(rate);
+		remark = SearchUtil.setDefaultAsterisk(remark);
+		itemCode = SearchUtil.setDefaultAsterisk(itemCode);
+		customer = SearchUtil.setDefaultAsterisk(customer);
+		fileName = SearchUtil.setDefaultAsterisk(fileName);
 		return purchaseOrderRepo.findByOrderNoAndItemAndMakeAndModelNoAndQuantityAndRateAndRemarkAndItemCodeAndCustomerAndFileName
 				(orderNo, item, make, modelNo, quantity, rate, remark, itemCode, customer, fileName,new PageRequest(0, 500));
 	}

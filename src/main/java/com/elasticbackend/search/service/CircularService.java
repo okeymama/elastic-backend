@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.elasticbackend.search.dto.CircularDto;
 import com.elasticbackend.search.repo.CircularRepo;
+import com.elasticbackend.search.util.SearchUtil;
 
 @Service
 public class CircularService {
@@ -81,6 +82,10 @@ public class CircularService {
 	}
 	
 	public List<CircularDto> getCircularMatch(String clientName, String circularNumber,String circularDetail,String departmant,String fileName){
+		circularNumber = SearchUtil.setDefaultAsterisk(circularNumber);
+		circularDetail = SearchUtil.setDefaultAsterisk(circularDetail);
+		departmant = SearchUtil.setDefaultAsterisk(departmant);
+		fileName = SearchUtil.setDefaultAsterisk(fileName);
 		List<CircularDto> circularDtos = circularRepo.findByCircularNumberAndCircularDetailAndDepartmantAndFileName(circularNumber, circularDetail, departmant, fileName, new PageRequest(0, 500));
 		return circularDtos.stream().filter(x -> x.getClientNumber().equals(clientName)).collect(Collectors.toList()); 
 	}

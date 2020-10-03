@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.elasticbackend.search.dto.EnquiryDto;
 import com.elasticbackend.search.repo.EnquiryRepo;
+import com.elasticbackend.search.util.SearchUtil;
 
 @Service
 public class EnquiryService {
@@ -50,6 +51,18 @@ public class EnquiryService {
 	}
 
 	public List<EnquiryDto> getMatchingEnquirys(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName){
+		
+		companyName = SearchUtil.setDefaultAsterisk(companyName);
+		personName = SearchUtil.setDefaultAsterisk(personName);
+		mobile = SearchUtil.setDefaultAsterisk(mobile);
+		place = SearchUtil.setDefaultAsterisk(place);
+		enquiryNumber = SearchUtil.setDefaultAsterisk(enquiryNumber);
+		itemDescription = SearchUtil.setDefaultAsterisk(itemDescription);
+		make = SearchUtil.setDefaultAsterisk(make);
+		status = SearchUtil.setDefaultAsterisk(status);
+		remark = SearchUtil.setDefaultAsterisk(remark);
+		fileName = SearchUtil.setDefaultAsterisk(fileName);
+		
 		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameAndPersonNameAndMobileAndPlaceAndEnquiryNumberAndItemDescriptionAndMakeAndStatusAndRemarkAndFileName
 				(companyName, personName, mobile,place ,enquiryNumber , itemDescription, make, status, remark, fileName, new PageRequest(0, 500));
 		return enquirys;

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.elasticbackend.search.dto.CatalogDto;
 import com.elasticbackend.search.repo.CatalogRepo;
+import com.elasticbackend.search.util.SearchUtil;
 
 @Service
 public class CatalogService {
@@ -50,6 +51,13 @@ public class CatalogService {
 	}
 
 	public List<CatalogDto> getMatchingCatalog(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName){
+		productName = SearchUtil.setDefaultAsterisk(productName);
+		modelNo = SearchUtil.setDefaultAsterisk(modelNo);
+		oldModelNo = SearchUtil.setDefaultAsterisk(oldModelNo);
+		voltage = SearchUtil.setDefaultAsterisk(voltage);
+		range = SearchUtil.setDefaultAsterisk(range);
+		colour = SearchUtil.setDefaultAsterisk(colour);
+		fileName = SearchUtil.setDefaultAsterisk(fileName);
 		return catalogRepo.findByProductNameAndModelNoAndOldModelNoAndVoltageAndRangeAndColourAndFileName
 				(productName, modelNo, oldModelNo, voltage, range, colour, fileName, new PageRequest(0, 500));
 	}
