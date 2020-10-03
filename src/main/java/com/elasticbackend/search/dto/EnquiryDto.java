@@ -38,6 +38,8 @@ public class EnquiryDto {
 	
 	private String fileName;
 	
+	private Date dueDate;
+	
 	private Date creationDate;
 	
 	private String createdBy;

@@ -49,7 +49,7 @@ public class PurchaseOrderController {
 
 	@PostMapping("/PurchaseOrders-Match")
 	public List<PurchaseOrderDto> getMatchingPurchaseOrder(@RequestBody PurchaseOrderDto purchaseOrderDto){
-		return purchaseOrderService.getMatchingPurchaseOrder(purchaseOrderDto.getOrderNo(), purchaseOrderDto.getItem(), purchaseOrderDto.getMake(), purchaseOrderDto.getModelNo(), purchaseOrderDto.getQuantity(), purchaseOrderDto.getRate(), purchaseOrderDto.getRemark(), purchaseOrderDto.getItemCode(), purchaseOrderDto.getCustomer(), purchaseOrderDto.getFileName());
+		return purchaseOrderService.getMatchingPurchaseOrder(purchaseOrderDto.getOrderNo(), purchaseOrderDto.getItem(), purchaseOrderDto.getMake(), purchaseOrderDto.getModelNo(), purchaseOrderDto.getQuantity(), purchaseOrderDto.getRate(), purchaseOrderDto.getRemark(), purchaseOrderDto.getItemCode(), purchaseOrderDto.getCustomer(), purchaseOrderDto.getFileName(),purchaseOrderDto.getCreatedBy());
 	}
 	
 }

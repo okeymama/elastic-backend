@@ -45,7 +45,7 @@ public class EnquiryController {
 
 	@PostMapping("/Enquiry-Match")
 	public List<EnquiryDto> getMatchingEnquirys(@RequestBody EnquiryDto enquiryDto){
-		return enquiryService.getMatchingEnquirys(enquiryDto.getCompanyName(), enquiryDto.getPersonName(), enquiryDto.getMobile(),enquiryDto.getPlace(),enquiryDto.getEnquiryNumber(), enquiryDto.getItemDescription(), enquiryDto.getMake(), enquiryDto.getStatus(), enquiryDto.getRemark(), enquiryDto.getFileName());
+		return enquiryService.getMatchingEnquirys(enquiryDto.getCompanyName(), enquiryDto.getPersonName(), enquiryDto.getMobile(),enquiryDto.getPlace(),enquiryDto.getEnquiryNumber(), enquiryDto.getItemDescription(), enquiryDto.getMake(), enquiryDto.getStatus(), enquiryDto.getRemark(), enquiryDto.getFileName(), enquiryDto.getCreatedBy());
 	}
 	
 }

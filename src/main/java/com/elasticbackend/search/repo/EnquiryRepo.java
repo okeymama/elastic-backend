@@ -14,11 +14,11 @@ public interface EnquiryRepo extends ElasticsearchRepository<EnquiryDto, String>
 
 	Optional<List<EnquiryDto>> findByEnquiryNumber(String enquiryNumber);
 	
-	List<EnquiryDto> findByCompanyNameOrPersonNameOrMobileOrPlaceOrEnquiryNumberOrItemDescriptionOrMakeOrStatusOrRemarkOrFileName
-	(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName, PageRequest pageRequest);
+	List<EnquiryDto> findByCompanyNameOrPersonNameOrMobileOrPlaceOrEnquiryNumberOrItemDescriptionOrMakeOrStatusOrRemarkOrFileNameOrCreatedBy
+	(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName, String createdBy,PageRequest pageRequest);
 
-	List<EnquiryDto> findByCompanyNameAndPersonNameAndMobileAndPlaceAndEnquiryNumberAndItemDescriptionAndMakeAndStatusAndRemarkAndFileName
-	(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName, PageRequest pageRequest);
+	List<EnquiryDto> findByCompanyNameAndPersonNameAndMobileAndPlaceAndEnquiryNumberAndItemDescriptionAndMakeAndStatusAndRemarkAndFileNameAndCreatedBy
+	(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName, String createdBy,PageRequest pageRequest);
 
 }
 

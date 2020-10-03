@@ -31,6 +31,8 @@ public class PurchaseOrderDto {
 	private String remark;
 
 	private String date;
+	
+	private Date dueDate;
 
 	private String itemCode;
 

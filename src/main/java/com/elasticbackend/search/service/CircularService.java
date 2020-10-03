@@ -53,7 +53,7 @@ public class CircularService {
 	
 	
 	public List<CircularDto> getCircularMatch(String clientName, String keyWord){
-		List<CircularDto> circularDtos = circularRepo.findByCircularNumberOrCircularDetailOrDepartmantOrFileName(keyWord, keyWord, keyWord, keyWord,new PageRequest(0, 500));
+		List<CircularDto> circularDtos = circularRepo.findByCircularNumberOrCircularDetailOrDepartmantOrFileNameOrCreatedBy(keyWord, keyWord, keyWord, keyWord,keyWord,new PageRequest(0, 500));
 		return circularDtos.stream().filter(x -> x.getClientNumber().equals(clientName)).collect(Collectors.toList());
 	}
 	
@@ -81,12 +81,12 @@ public class CircularService {
 		return circularRepo.countByCreatedBy(createdBy);
 	}
 	
-	public List<CircularDto> getCircularMatch(String clientName, String circularNumber,String circularDetail,String departmant,String fileName){
+	public List<CircularDto> getCircularMatch(String clientName, String circularNumber,String circularDetail,String departmant,String fileName, String createdBy){
 		circularNumber = SearchUtil.setDefaultAsterisk(circularNumber);
 		circularDetail = SearchUtil.setDefaultAsterisk(circularDetail);
 		departmant = SearchUtil.setDefaultAsterisk(departmant);
 		fileName = SearchUtil.setDefaultAsterisk(fileName);
-		List<CircularDto> circularDtos = circularRepo.findByCircularNumberAndCircularDetailAndDepartmantAndFileName(circularNumber, circularDetail, departmant, fileName, new PageRequest(0, 500));
+		List<CircularDto> circularDtos = circularRepo.findByCircularNumberAndCircularDetailAndDepartmantAndFileNameAndCreatedBy(circularNumber, circularDetail, departmant, fileName,createdBy,new PageRequest(0, 500));
 		return circularDtos.stream().filter(x -> x.getClientNumber().equals(clientName)).collect(Collectors.toList()); 
 	}
 	

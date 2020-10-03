@@ -18,11 +18,11 @@ public interface CatalogRepo extends ElasticsearchRepository<CatalogDto, String>
 	Optional<List<CatalogDto>> findByModelNo(String modelNo);
 	
 	
-	List<CatalogDto> findByProductNameOrModelNoOrOldModelNoOrVoltageOrRangeOrColourOrFileName
-	(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName, PageRequest pageRequest);
+	List<CatalogDto> findByProductNameOrModelNoOrOldModelNoOrVoltageOrRangeOrColourOrFileNameOrCreatedBy
+	(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName,String CreatedBy, PageRequest pageRequest);
 
 
-	List<CatalogDto> findByProductNameAndModelNoAndOldModelNoAndVoltageAndRangeAndColourAndFileName
-	(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName, PageRequest pageRequest);
+	List<CatalogDto> findByProductNameAndModelNoAndOldModelNoAndVoltageAndRangeAndColourAndFileNameAndCreatedBy
+	(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName,String CreatedBy, PageRequest pageRequest);
 
 }

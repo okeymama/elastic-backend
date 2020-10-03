@@ -46,7 +46,7 @@ public class CatalogController {
 
 	@PostMapping("/Catalog-Match")
 	public List<CatalogDto>	getMatchingCatalog(@RequestBody CatalogDto catalogDto){
-		return catalogService.getMatchingCatalog(catalogDto.getProductName(), catalogDto.getModelNo(), catalogDto.getModelNo(), catalogDto.getVoltage(), catalogDto.getRange(), catalogDto.getColour(), catalogDto.getFileName());
+		return catalogService.getMatchingCatalog(catalogDto.getProductName(), catalogDto.getModelNo(), catalogDto.getModelNo(), catalogDto.getVoltage(), catalogDto.getRange(), catalogDto.getColour(), catalogDto.getFileName(),catalogDto.getCreatedBy());
 	}
 }
 

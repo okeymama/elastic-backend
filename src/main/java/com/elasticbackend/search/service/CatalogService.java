@@ -46,11 +46,11 @@ public class CatalogService {
 	}
 
 	public List<CatalogDto> getMatchingCatalog(String key){
-		return catalogRepo.findByProductNameOrModelNoOrOldModelNoOrVoltageOrRangeOrColourOrFileName
-				(key, key, key, key, key, key, key, new PageRequest(0, 500));
+		return catalogRepo.findByProductNameOrModelNoOrOldModelNoOrVoltageOrRangeOrColourOrFileNameOrCreatedBy
+				(key, key, key, key, key, key, key, key, new PageRequest(0, 500));
 	}
 
-	public List<CatalogDto> getMatchingCatalog(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName){
+	public List<CatalogDto> getMatchingCatalog(String productName,String modelNo,String oldModelNo,String voltage,String range,String colour,String fileName,String createdBy){
 		productName = SearchUtil.setDefaultAsterisk(productName);
 		modelNo = SearchUtil.setDefaultAsterisk(modelNo);
 		oldModelNo = SearchUtil.setDefaultAsterisk(oldModelNo);
@@ -58,8 +58,8 @@ public class CatalogService {
 		range = SearchUtil.setDefaultAsterisk(range);
 		colour = SearchUtil.setDefaultAsterisk(colour);
 		fileName = SearchUtil.setDefaultAsterisk(fileName);
-		return catalogRepo.findByProductNameAndModelNoAndOldModelNoAndVoltageAndRangeAndColourAndFileName
-				(productName, modelNo, oldModelNo, voltage, range, colour, fileName, new PageRequest(0, 500));
+		return catalogRepo.findByProductNameAndModelNoAndOldModelNoAndVoltageAndRangeAndColourAndFileNameAndCreatedBy
+				(productName, modelNo, oldModelNo, voltage, range, colour, fileName, createdBy, new PageRequest(0, 500));
 	}
 	
 }

@@ -45,12 +45,12 @@ public class EnquiryService {
 	}
 	
 	public List<EnquiryDto> getMatchingEnquirys(String key){
-		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameOrPersonNameOrMobileOrPlaceOrEnquiryNumberOrItemDescriptionOrMakeOrStatusOrRemarkOrFileName
-				(key, key, key, key, key, key, key, key, key, key, new PageRequest(0, 500));
+		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameOrPersonNameOrMobileOrPlaceOrEnquiryNumberOrItemDescriptionOrMakeOrStatusOrRemarkOrFileNameOrCreatedBy
+				(key, key, key, key, key, key, key, key, key, key,key, new PageRequest(0, 500));
 		return enquirys;
 	}
 
-	public List<EnquiryDto> getMatchingEnquirys(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName){
+	public List<EnquiryDto> getMatchingEnquirys(String companyName,String personName,String mobile,String place,String enquiryNumber,String itemDescription,String make,String status,String remark,String fileName, String createdBy){
 		
 		companyName = SearchUtil.setDefaultAsterisk(companyName);
 		personName = SearchUtil.setDefaultAsterisk(personName);
@@ -62,9 +62,10 @@ public class EnquiryService {
 		status = SearchUtil.setDefaultAsterisk(status);
 		remark = SearchUtil.setDefaultAsterisk(remark);
 		fileName = SearchUtil.setDefaultAsterisk(fileName);
+		createdBy = SearchUtil.setDefaultAsterisk(createdBy);
 		
-		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameAndPersonNameAndMobileAndPlaceAndEnquiryNumberAndItemDescriptionAndMakeAndStatusAndRemarkAndFileName
-				(companyName, personName, mobile,place ,enquiryNumber , itemDescription, make, status, remark, fileName, new PageRequest(0, 500));
+		List<EnquiryDto> enquirys = enquiryRepo.findByCompanyNameAndPersonNameAndMobileAndPlaceAndEnquiryNumberAndItemDescriptionAndMakeAndStatusAndRemarkAndFileNameAndCreatedBy
+				(companyName, personName, mobile,place ,enquiryNumber , itemDescription, make, status, remark, fileName, createdBy,new PageRequest(0, 500));
 		return enquirys;
 	}
 	

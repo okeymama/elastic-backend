@@ -73,11 +73,11 @@ public class PurchaseOrderService {
 	
 	
 	public List<PurchaseOrderDto> getMatchingPurchaseOrder(String key){
-		return purchaseOrderRepo.findByOrderNoOrItemOrMakeOrModelNoOrQuantityOrRateOrRemarkOrItemCodeOrCustomerOrFileName
-				(key, key, key, key, key, key, key, key, key, key, new PageRequest(0, 500));
+		return purchaseOrderRepo.findByOrderNoOrItemOrMakeOrModelNoOrQuantityOrRateOrRemarkOrItemCodeOrCustomerOrFileNameOrCreatedBy
+				(key, key, key, key, key, key, key, key, key, key,key, new PageRequest(0, 500));
 	}
 	
-	public List<PurchaseOrderDto> getMatchingPurchaseOrder(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName){
+	public List<PurchaseOrderDto> getMatchingPurchaseOrder(String orderNo,String item,String make,String modelNo,String quantity,String rate,String remark,String itemCode,String customer,String fileName,String createdBy){
 		orderNo = SearchUtil.setDefaultAsterisk(orderNo);
 		item = SearchUtil.setDefaultAsterisk(item);
 		make = SearchUtil.setDefaultAsterisk(make);
@@ -88,8 +88,8 @@ public class PurchaseOrderService {
 		itemCode = SearchUtil.setDefaultAsterisk(itemCode);
 		customer = SearchUtil.setDefaultAsterisk(customer);
 		fileName = SearchUtil.setDefaultAsterisk(fileName);
-		return purchaseOrderRepo.findByOrderNoAndItemAndMakeAndModelNoAndQuantityAndRateAndRemarkAndItemCodeAndCustomerAndFileName
-				(orderNo, item, make, modelNo, quantity, rate, remark, itemCode, customer, fileName,new PageRequest(0, 500));
+		return purchaseOrderRepo.findByOrderNoAndItemAndMakeAndModelNoAndQuantityAndRateAndRemarkAndItemCodeAndCustomerAndFileNameAndCreatedBy
+				(orderNo, item, make, modelNo, quantity, rate, remark, itemCode, customer, fileName, createdBy,new PageRequest(0, 500));
 	}
 
 

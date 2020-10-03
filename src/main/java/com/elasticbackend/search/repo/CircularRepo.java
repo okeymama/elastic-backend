@@ -23,7 +23,7 @@ import com.elasticbackend.search.dto.CircularDto;
 @Repository
 public interface CircularRepo extends ElasticsearchRepository<CircularDto, Long>{
 
-	List<CircularDto> findByCircularNumberOrCircularDetailOrDepartmantOrFileName(String circularNumber,String circularDetail,String departmant, String fileName, PageRequest pageRequest);
+	List<CircularDto> findByCircularNumberOrCircularDetailOrDepartmantOrFileNameOrCreatedBy(String circularNumber,String circularDetail,String departmant, String fileName, String createdBy,PageRequest pageRequest);
 
 	Optional<List<CircularDto>> findByClientNumberAndCircularNumber(String clientName, String circularNumber);
 	
@@ -38,8 +38,8 @@ public interface CircularRepo extends ElasticsearchRepository<CircularDto, Long>
 
 	Long countByCreatedBy(String createdBy);
 
-	List<CircularDto> findByCircularNumberAndCircularDetailAndDepartmantAndFileName(String circularNumber,
-			String circularDetail, String departmant, String fileName, PageRequest pageRequest);
+	List<CircularDto> findByCircularNumberAndCircularDetailAndDepartmantAndFileNameAndCreatedBy(String circularNumber,
+			String circularDetail, String departmant, String fileName,String createdBy,PageRequest pageRequest);
 	
 }
 		

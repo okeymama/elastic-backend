@@ -70,7 +70,7 @@ public class CircularController {
 	
 	@PostMapping("/Circulars-Match")
 	public @ResponseBody ResponseEntity<List<CircularDto>> getCircularMatch(@RequestBody CircularDto circularDto){
-		List<CircularDto> circularDtos = circularService.getCircularMatch(circularDto.getClientNumber(),circularDto.getCircularNumber(), circularDto.getCircularDetail(),circularDto.getDepartmant(),circularDto.getFileName());
+		List<CircularDto> circularDtos = circularService.getCircularMatch(circularDto.getClientNumber(),circularDto.getCircularNumber(), circularDto.getCircularDetail(),circularDto.getDepartmant(),circularDto.getFileName(),circularDto.getCreatedBy());
 		 return ResponseEntity.ok(circularDtos);
 	}
 	
