@@ -30,6 +30,8 @@ public class UserDto {
 	
 	private Date creationDate;
 	
+	private String token;
+	
 	private String createdBy;
 
 	public String getUserName() {
@@ -71,7 +73,13 @@ public class UserDto {
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
-	
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
 }
